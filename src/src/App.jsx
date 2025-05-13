@@ -27,7 +27,7 @@ export default function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const newProfile = { ...formData, type: userType, timestamp: new Date().toLocaleString() };
+    const newProfile = { ...formData, type: userType, timestamp: new Date().toLocaleString(), status: "pending" };
     setSubmittedProfiles([...submittedProfiles, newProfile]);
     alert("Profil envoyé avec succès.");
     setFormData({ name: "", email: "", description: "" });
@@ -50,6 +50,12 @@ export default function App() {
     } else {
       alert("Identifiants incorrects");
     }
+  };
+
+  const updateStatus = (index, status) => {
+    const updated = [...submittedProfiles];
+    updated[index].status = status;
+    setSubmittedProfiles(updated);
   };
 
   return (
@@ -90,10 +96,6 @@ export default function App() {
             <div className="relative z-10 px-4 text-white animate-fade-in">
               <h1 className="text-7xl font-black tracking-widest uppercase drop-shadow-xl">VULTURE</h1>
               <p className="mt-6 text-xl text-gray-200 italic max-w-2xl mx-auto drop-shadow">La maison des créateurs de demain. Luxe, sélectivité, influence et impact global.</p>
-              <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-                <button onClick={() => { setUserType("model"); setAuthStep(false); }} className="bg-white text-black px-8 py-3 rounded-full font-semibold hover:bg-gray-200 transition shadow-lg">Espace Modèle</button>
-                <button onClick={() => { setUserType("brand"); setAuthStep(false); }} className="border border-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-black transition shadow-lg">Espace Marque</button>
-              </div>
             </div>
           </section>
 
@@ -134,35 +136,37 @@ export default function App() {
 
       {adminView && (
         <section className="py-24 px-6 max-w-4xl mx-auto animate-fade-in">
-          <h2 className="text-4xl font-bold text-center mb-6 uppercase tracking-wide">Espace Administrateur</h2>
+          <div className="text-center mb-8">
+            <img src="/pdglouisaimee.JPG" alt="PDG Louis-Aimée" className="w-24 h-24 mx-auto rounded-full border-4 border-white mb-4" />
+            <h2 className="text-3xl font-bold uppercase tracking-wide">Bonjour Monsieur le PDG LOUIS-AIMÉE</h2>
+          </div>
           {submittedProfiles.length === 0 ? (
             <p className="text-center text-gray-400">Aucun profil soumis pour le moment.</p>
           ) : (
             <ul className="space-y-4">
               {submittedProfiles.map((profile, index) => (
                 <li key={index} className="border border-gray-800 rounded p-4 bg-gray-900">
-                  <p className="text-sm text-gray-400 mb-1">Type : {profile.type}</p>
+                  <div className="flex justify-between items-center mb-2">
+                    <p className="text-sm text-gray-400">Type : {profile.type}</p>
+                    <span className={`text-xs px-2 py-1 rounded ${profile.status === "accepted" ? "bg-green-600" : profile.status === "refused" ? "bg-red-600" : "bg-yellow-600"}`}>{profile.status}</span>
+                  </div>
                   <p className="text-lg font-semibold">{profile.name}</p>
                   <p className="text-sm">{profile.email}</p>
                   <p className="text-sm italic text-gray-300 mt-2">{profile.description}</p>
                   <p className="text-xs text-right text-gray-500 mt-2">Soumis le {profile.timestamp}</p>
+                  {profile.status === "pending" && (
+                    <div className="mt-4 flex gap-4">
+                      <button onClick={() => updateStatus(index, "accepted")} className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded">Accepter</button>
+                      <button onClick={() => updateStatus(index, "refused")} className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded">Refuser</button>
+                    </div>
+                  )}
                 </li>
               ))}
             </ul>
           )}
         </section>
       )}
-
-      <footer className="text-center text-xs text-gray-600 py-8 border-t border-gray-800 mt-12">
-        <div className="mb-2">© 2025 VULTURE. Tous droits réservés.</div>
-        <div className="flex justify-center gap-6 text-sm">
-          <a href="#" className="hover:text-white transition">Mentions légales</a>
-          <a href="#" className="hover:text-white transition">Instagram</a>
-          <a href="#" className="hover:text-white transition">Contact</a>
-        </div>
-      </footer>
     </div>
   );
 }
-
 
