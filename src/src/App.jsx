@@ -139,23 +139,25 @@ export default function App() {
       )}
 
       {userType && !adminView && (
-        <section className="py-32 px-6 max-w-2xl mx-auto animate-fade-in">
-          <h2 className="text-4xl font-bold text-center mb-6 uppercase tracking-wide">{userType === "model" ? "Espace Modèle" : "Espace Marque"}</h2>
+        <section className="py-32 px-6 max-w-2xl mx-auto animate-fade-in bg-black border-t border-gray-800">
+          <h2 className="text-4xl font-bold text-center mb-6 uppercase tracking-wide">
+            {userType === "model" ? "Espace Modèle" : "Espace Marque"}
+          </h2>
           <form onSubmit={handleSubmit} className="space-y-6">
             <input type="text" name="name" placeholder="Nom ou structure" value={formData.name} onChange={handleChange} className="w-full p-3 bg-gray-900 text-white rounded border border-gray-700 placeholder-gray-500" required />
             <input type="email" name="email" placeholder="Email professionnel" value={formData.email} onChange={handleChange} className="w-full p-3 bg-gray-900 text-white rounded border border-gray-700 placeholder-gray-500" required />
             <textarea name="description" placeholder="Décrivez votre univers, vos projets, votre vision..." value={formData.description} onChange={handleChange} className="w-full p-3 bg-gray-900 text-white rounded border border-gray-700 placeholder-gray-500 h-32" required></textarea>
             <input type="url" name="portfolio" placeholder="Lien vers votre portfolio (facultatif)" value={formData.portfolio} onChange={handleChange} className="w-full p-3 bg-gray-900 text-white rounded border border-gray-700 placeholder-gray-500" />
             <input type="number" name="age" placeholder="Âge" value={formData.age} onChange={handleChange} className="w-full p-3 bg-gray-900 text-white rounded border border-gray-700 placeholder-gray-500" required />
-<input type="text" name="platform" placeholder="Plateforme principale (Instagram, TikTok, etc.)" value={formData.platform} onChange={handleChange} className="w-full p-3 bg-gray-900 text-white rounded border border-gray-700 placeholder-gray-500" required />
-<input type="number" name="instagram" placeholder="Abonnés Instagram" value={formData.followers.instagram} onChange={(e) => setFormData({ ...formData, followers: { ...formData.followers, instagram: e.target.value } })} className="w-full p-3 bg-gray-900 text-white rounded border border-gray-700 placeholder-gray-500" />
-<input type="number" name="twitter" placeholder="Abonnés Twitter" value={formData.followers.twitter} onChange={(e) => setFormData({ ...formData, followers: { ...formData.followers, twitter: e.target.value } })} className="w-full p-3 bg-gray-900 text-white rounded border border-gray-700 placeholder-gray-500" />
-<input type="number" name="tiktok" placeholder="Abonnés TikTok" value={formData.followers.tiktok} onChange={(e) => setFormData({ ...formData, followers: { ...formData.followers, tiktok: e.target.value } })} className="w-full p-3 bg-gray-900 text-white rounded border border-gray-700 placeholder-gray-500" />
-<input type="number" name="onlyfans" placeholder="Abonnés OnlyFans" value={formData.followers.onlyfans} onChange={(e) => setFormData({ ...formData, followers: { ...formData.followers, onlyfans: e.target.value } })} className="w-full p-3 bg-gray-900 text-white rounded border border-gray-700 placeholder-gray-500" />
-
-<button type="submit" className="bg-white text-black px-6 py-3 rounded-full font-semibold hover:bg-gray-200 transition w-full shadow">Envoyer mon profil</button>
+            <input type="text" name="platform" placeholder="Plateforme principale (Instagram, TikTok, etc.)" value={formData.platform} onChange={handleChange} className="w-full p-3 bg-gray-900 text-white rounded border border-gray-700 placeholder-gray-500" required />
+            <input type="number" name="instagram" placeholder="Abonnés Instagram" value={formData.followers.instagram} onChange={(e) => setFormData({ ...formData, followers: { ...formData.followers, instagram: e.target.value } })} className="w-full p-3 bg-gray-900 text-white rounded border border-gray-700 placeholder-gray-500" />
+            <input type="number" name="twitter" placeholder="Abonnés Twitter" value={formData.followers.twitter} onChange={(e) => setFormData({ ...formData, followers: { ...formData.followers, twitter: e.target.value } })} className="w-full p-3 bg-gray-900 text-white rounded border border-gray-700 placeholder-gray-500" />
+            <input type="number" name="tiktok" placeholder="Abonnés TikTok" value={formData.followers.tiktok} onChange={(e) => setFormData({ ...formData, followers: { ...formData.followers, tiktok: e.target.value } })} className="w-full p-3 bg-gray-900 text-white rounded border border-gray-700 placeholder-gray-500" />
+            <input type="number" name="onlyfans" placeholder="Abonnés OnlyFans" value={formData.followers.onlyfans} onChange={(e) => setFormData({ ...formData, followers: { ...formData.followers, onlyfans: e.target.value } })} className="w-full p-3 bg-gray-900 text-white rounded border border-gray-700 placeholder-gray-500" />
+            <button type="submit" className="bg-white text-black px-6 py-3 rounded-full font-semibold hover:bg-gray-200 transition w-full shadow">Envoyer mon profil</button>
           </form>
         </section>
+      )}
       )}
 
       {adminView && (
