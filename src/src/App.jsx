@@ -91,8 +91,8 @@ export default function App() {
               <h1 className="text-7xl font-black tracking-widest uppercase drop-shadow-xl">VULTURE</h1>
               <p className="mt-6 text-xl text-gray-200 italic max-w-2xl mx-auto drop-shadow">La maison des créateurs de demain. Luxe, sélectivité, influence et impact global.</p>
               <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-                <button onClick={() => setUserType("model")} className="bg-white text-black px-8 py-3 rounded-full font-semibold hover:bg-gray-200 transition shadow-lg">Espace Modèle</button>
-                <button onClick={() => setUserType("brand")} className="border border-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-black transition shadow-lg">Espace Marque</button>
+                <button onClick={() => { setUserType("model"); setAuthStep(false); }} className="bg-white text-black px-8 py-3 rounded-full font-semibold hover:bg-gray-200 transition shadow-lg">Espace Modèle</button>
+                <button onClick={() => { setUserType("brand"); setAuthStep(false); }} className="border border-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-black transition shadow-lg">Espace Marque</button>
               </div>
             </div>
           </section>
