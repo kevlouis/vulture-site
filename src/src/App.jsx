@@ -1,11 +1,22 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./index.css";
 import mannequin from "../assets/image0.jpeg";
-import logo from "../assets/Vulture.png";
+import img2 from "../assets/LOUIS VUITTON.jpeg";
+import img3 from "../assets/HAJOUE72SD4OBCQ7GZVVBZ3ZAQ.jpeg";
+
+const slideshow = [mannequin, img2, img3];
 
 export default function App() {
   const [userType, setUserType] = useState(null);
   const [formData, setFormData] = useState({ name: "", email: "", description: "" });
+  const [bgIndex, setBgIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setBgIndex((prev) => (prev + 1) % slideshow.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -23,8 +34,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-black text-white font-sans">
-      <header className="fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-6 py-4 bg-black/80 backdrop-blur border-b border-gray-800">
-        <img src={logo} alt="Vulture Logo" className="h-10" />
+      <header className="fixed top-0 left-0 right-0 z-50 flex justify-end items-center px-6 py-4 bg-black/80 backdrop-blur border-b border-gray-800">
         <nav className="space-x-6 text-sm font-medium">
           <button onClick={() => setUserType("model")} className="hover:text-gray-300 transition">Modèle</button>
           <button onClick={() => setUserType("brand")} className="hover:text-gray-300 transition">Marque</button>
@@ -36,11 +46,11 @@ export default function App() {
 
       {!userType && (
         <section className="relative h-screen flex items-center justify-center text-center bg-black pt-24">
-          <div className="absolute inset-0 w-full h-full overflow-hidden">
+          <div className="absolute inset-0 w-full h-full overflow-hidden transition-all duration-1000">
             <img
-              src={mannequin}
-              alt="VULTURE Model"
-              className="w-full h-full object-cover object-center scale-105 opacity-80"
+              src={slideshow[bgIndex]}
+              alt="VULTURE Background"
+              className="w-full h-full object-cover object-center scale-105 opacity-80 transition-opacity duration-1000"
             />
             <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/70 to-black"></div>
           </div>
@@ -126,3 +136,4 @@ export default function App() {
     </div>
   );
 }
+
