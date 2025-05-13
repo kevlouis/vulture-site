@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./index.css";
-import mannequin from "./assets/image0.jpeg"; // image d'accueil principale
-import logo from "./assets/Vulture.png";
+import mannequin from "../assets/image0.jpeg"; // image d'accueil principale
+import logo from "../assets/Vulture.png";
 
 export default function App() {
   return (
