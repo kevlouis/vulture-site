@@ -169,8 +169,7 @@ export default function App() {
                 </div>
                 <p className="text-lg font-semibold">{profile.name}</p>
                 <p className="text-sm">{profile.email}</p>
-                $1
-{profile.age && (<p className='text-sm mt-2'>Âge : {profile.age}</p>)}
+                {profile.age && (<p className='text-sm mt-2'>Âge : {profile.age}</p>)}
 {profile.platform && (<p className='text-sm mt-2'>Plateforme principale : {profile.platform}</p>)}
 <p className='text-sm mt-2'>Abonnés :</p>
 <ul className='text-sm ml-4 list-disc'>
