@@ -1,16 +1,22 @@
-const root = document.getElementById("root");
-
-const title = document.createElement("h1");
-title.textContent = "VULTURE";
-
-const subtitle = document.createElement("p");
-subtitle.textContent = "Le réseau des stars de demain.";
-
-const message = document.createElement("p");
-message.style.marginTop = "2rem";
-message.textContent = "Ce site est en cours de développement. Revenez bientôt.";
-
-root.appendChild(title);
-root.appendChild(subtitle);
-root.appendChild(message);
-
+{
+  "name": "vulture-site",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^0.1.0",
+    "@vitejs/plugin-react": "^4.0.0",
+    "autoprefixer": "^10.4.14",
+    "postcss": "^8.4.21",
+    "tailwindcss": "^4.0.0",
+    "vite": "^4.4.0"
+  }
+}
