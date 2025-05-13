@@ -3,21 +3,8 @@ import { useState, useEffect } from "react";
 import "./index.css";
 import mannequin from "../assets/image0.jpeg";
 import img3 from "../assets/HAJOUE72SD4OBCQ7GZVVBZ3ZAQ.jpeg";
-import { initializeApp } from "firebase/app";
-import { getFirestore, collection, addDoc, getDocs, updateDoc, doc } from "firebase/firestore";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyD4jDQHrDEdJkRsotod4ushpFi_rCNMXBo",
-  authDomain: "vulturecom-com.firebaseapp.com",
-  projectId: "vulturecom-com",
-  storageBucket: "vulturecom-com.firebasestorage.app",
-  messagingSenderId: "1095234202380",
-  appId: "1:1095234202380:web:4c59716bf0c143cfc33729",
-  measurementId: "G-JJG5J8VBYX"
-};
 
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
 
 const slideshow = [mannequin, img3];
 
@@ -50,23 +37,16 @@ export default function App() {
     return () => clearInterval(interval);
   }, []);
 
-  useEffect(() => {
-    const fetchProfiles = async () => {
-      const querySnapshot = await getDocs(collection(db, "profiles"));
-      const profiles = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-      setSubmittedProfiles(profiles);
-    };
-    fetchProfiles();
-  }, [adminView]);
+  
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     const newProfile = { ...formData, type: userType, timestamp: new Date().toLocaleString(), status: "pending" };
-    await addDoc(collection(db, "profiles"), newProfile);
+    setSubmittedProfiles([...submittedProfiles, newProfile]);
     alert("Profil envoyé avec succès.");
     setFormData({
       name: "",
@@ -98,10 +78,8 @@ export default function App() {
     }
   };
 
-  const updateStatus = async (id, status) => {
-    const profileRef = doc(db, "profiles", id);
-    await updateDoc(profileRef, { status });
-    const updated = submittedProfiles.map((p) => p.id === id ? { ...p, status } : p);
+  const updateStatus = (id, status) => {
+    const updated = submittedProfiles.map((p, index) => index === id ? { ...p, status } : p);
     setSubmittedProfiles(updated);
   };
 
