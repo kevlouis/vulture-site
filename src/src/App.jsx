@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
 import "./index.css";
 import mannequin from "../assets/image0.jpeg";
-import img2 from "../assets/LOUIS VUITTON.jpeg";
 import img3 from "../assets/HAJOUE72SD4OBCQ7GZVVBZ3ZAQ.jpeg";
 
-const slideshow = [mannequin, img2, img3];
+const slideshow = [mannequin, img3];
 
 export default function App() {
   const [userType, setUserType] = useState(null);
@@ -33,7 +32,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white font-sans">
+    <div className="min-h-screen bg-black text-white font-sans transition-all duration-1000">
       <header className="fixed top-0 left-0 right-0 z-50 flex justify-end items-center px-6 py-4 bg-black/80 backdrop-blur border-b border-gray-800">
         <nav className="space-x-6 text-sm font-medium">
           <button onClick={() => setUserType("model")} className="hover:text-gray-300 transition">Modèle</button>
@@ -45,7 +44,7 @@ export default function App() {
       </header>
 
       {!userType && (
-        <section className="relative h-screen flex items-center justify-center text-center bg-black pt-24">
+        <section className="relative h-screen flex items-center justify-center text-center bg-black pt-24 overflow-hidden">
           <div className="absolute inset-0 w-full h-full overflow-hidden transition-all duration-1000">
             <img
               src={slideshow[bgIndex]}
@@ -54,7 +53,7 @@ export default function App() {
             />
             <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/70 to-black"></div>
           </div>
-          <div className="relative z-10 px-4 text-white">
+          <div className="relative z-10 px-4 text-white animate-fade-in">
             <h1 className="text-7xl font-black tracking-widest uppercase drop-shadow-xl">VULTURE</h1>
             <p className="mt-6 text-xl text-gray-200 italic max-w-2xl mx-auto drop-shadow">
               La maison des créateurs de demain. Luxe, sélectivité, influence et impact global.
@@ -78,7 +77,7 @@ export default function App() {
       )}
 
       {userType && (
-        <section className="py-32 px-6 max-w-2xl mx-auto">
+        <section className="py-32 px-6 max-w-2xl mx-auto animate-fade-in">
           <h2 className="text-4xl font-bold text-center mb-6 uppercase tracking-wide">
             {userType === "model" ? "Espace Modèle" : "Espace Marque"}
           </h2>
@@ -136,4 +135,5 @@ export default function App() {
     </div>
   );
 }
+
 
