@@ -60,8 +60,8 @@ export default function App() {
 
       <header className="fixed top-0 left-0 right-0 z-50 flex justify-end items-center px-6 py-4 bg-black/80 backdrop-blur border-b border-gray-800">
         <nav className="space-x-6 text-sm font-medium">
-          <button onClick={() => setUserType("model"); setAuthStep(false)} className="hover:text-gray-300 transition">Modèle</button>
-          <button onClick={() => setUserType("brand"); setAuthStep(false)} className="hover:text-gray-300 transition">Marque</button>
+          <button onClick={() => { setUserType("model"); setAuthStep(false); }} className="hover:text-gray-300 transition">Modèle</button>
+          <button onClick={() => { setUserType("brand"); setAuthStep(false); }} className="hover:text-gray-300 transition">Marque</button>
           <button onClick={() => setAuthStep(true)} className="hover:text-gray-300 transition">Admin</button>
           {(userType || adminView || authStep) && (
             <button onClick={handleBack} className="hover:text-gray-300 transition">Retour</button>
@@ -164,4 +164,5 @@ export default function App() {
     </div>
   );
 }
+
 
