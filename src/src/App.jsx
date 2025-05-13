@@ -95,6 +95,23 @@ export default function App() {
           <p className="mt-6 text-xl text-gray-200 italic max-w-2xl mx-auto drop-shadow">La maison des créateurs de demain. Luxe, sélectivité, influence et impact global.</p>
         </div>
       </section>
+
+      <section className="py-24 px-6 max-w-full mx-auto animate-fade-in overflow-x-scroll whitespace-nowrap">
+        <h2 className="text-3xl font-bold mb-4 px-4 uppercase tracking-wide">Éditions visuelles</h2>
+        <div className="flex space-x-6 px-4">
+          {[mannequin, img3].map((img, i) => (
+            <img key={i} src={img} alt={`vulture-visual-${i}`} className="inline-block w-[80vw] h-[50vh] object-cover rounded-xl shadow-lg border border-gray-700" />
+          ))}
+        </div>
+      </section>
+
+      <section className="py-32 px-6 max-w-3xl mx-auto animate-fade-in text-center">
+        <h2 className="text-4xl font-bold uppercase tracking-wide mb-6">La Maison VULTURE</h2>
+        <p className="text-gray-300 text-lg leading-relaxed">
+          VULTURE est plus qu'une simple vitrine — c'est une maison d'excellence. Nous représentons les talents d’aujourd’hui et de demain avec une approche radicalement sélective, artistique et stratégique. Dans un monde saturé d’images, notre différence réside dans l’authenticité, l'esthétique et l'impact mesurable.
+        </p>
+      </section>
+
       <audio autoPlay loop>
         <source src="/vulture-theme.wav" type="audio/wav" />
       </audio>
