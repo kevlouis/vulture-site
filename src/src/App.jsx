@@ -1,13 +1,42 @@
+// 🚀 Prochaine version : VULTURE avec Firebase, Portfolio et Dashboard
 import { useState, useEffect } from "react";
 import "./index.css";
 import mannequin from "../assets/image0.jpeg";
 import img3 from "../assets/HAJOUE72SD4OBCQ7GZVVBZ3ZAQ.jpeg";
+import { initializeApp } from "firebase/app";
+import { getFirestore, collection, addDoc, getDocs, updateDoc, doc } from "firebase/firestore";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyD4jDQHrDEdJkRsotod4ushpFi_rCNMXBo",
+  authDomain: "vulturecom-com.firebaseapp.com",
+  projectId: "vulturecom-com",
+  storageBucket: "vulturecom-com.firebasestorage.app",
+  messagingSenderId: "1095234202380",
+  appId: "1:1095234202380:web:4c59716bf0c143cfc33729",
+  measurementId: "G-JJG5J8VBYX"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
 const slideshow = [mannequin, img3];
 
 export default function App() {
   const [userType, setUserType] = useState(null);
-  const [formData, setFormData] = useState({ name: "", email: "", description: "" });
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    description: "",
+    portfolio: "",
+    age: "",
+    platform: "",
+    followers: {
+      instagram: "",
+      twitter: "",
+      tiktok: "",
+      onlyfans: ""
+    }
+  });
   const [bgIndex, setBgIndex] = useState(0);
   const [submittedProfiles, setSubmittedProfiles] = useState([]);
   const [adminView, setAdminView] = useState(false);
@@ -21,16 +50,33 @@ export default function App() {
     return () => clearInterval(interval);
   }, []);
 
+  useEffect(() => {
+    const fetchProfiles = async () => {
+      const querySnapshot = await getDocs(collection(db, "profiles"));
+      const profiles = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+      setSubmittedProfiles(profiles);
+    };
+    fetchProfiles();
+  }, [adminView]);
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const newProfile = { ...formData, type: userType, timestamp: new Date().toLocaleString(), status: "pending" };
-    setSubmittedProfiles([...submittedProfiles, newProfile]);
+    await addDoc(collection(db, "profiles"), newProfile);
     alert("Profil envoyé avec succès.");
-    setFormData({ name: "", email: "", description: "" });
+    setFormData({
+      name: "",
+      email: "",
+      description: "",
+      portfolio: "",
+      age: "",
+      platform: "",
+      followers: { instagram: "", twitter: "", tiktok: "", onlyfans: "" }
+    });
     setUserType(null);
   };
 
@@ -39,7 +85,7 @@ export default function App() {
     setAdminView(false);
     setAuthStep(false);
     setAuthData({ username: "", password: "" });
-    setFormData({ name: "", email: "", description: "" });
+    setFormData({ name: "", email: "", description: "", portfolio: "" });
   };
 
   const handleAdminAuth = (e) => {
@@ -52,9 +98,10 @@ export default function App() {
     }
   };
 
-  const updateStatus = (index, status) => {
-    const updated = [...submittedProfiles];
-    updated[index].status = status;
+  const updateStatus = async (id, status) => {
+    const profileRef = doc(db, "profiles", id);
+    await updateDoc(profileRef, { status });
+    const updated = submittedProfiles.map((p) => p.id === id ? { ...p, status } : p);
     setSubmittedProfiles(updated);
   };
 
@@ -86,87 +133,65 @@ export default function App() {
         </section>
       )}
 
-      {!userType && !adminView && !authStep && (
-        <>
-          <section className="relative h-screen flex items-center justify-center text-center bg-black pt-24 overflow-hidden">
-            <div className="absolute inset-0 w-full h-full overflow-hidden transition-all duration-1000">
-              <img src={slideshow[bgIndex]} alt="VULTURE Background" className="w-full h-full object-cover object-center scale-105 opacity-80 transition-opacity duration-1000" />
-              <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/70 to-black"></div>
-            </div>
-            <div className="relative z-10 px-4 text-white animate-fade-in">
-              <h1 className="text-7xl font-black tracking-widest uppercase drop-shadow-xl">VULTURE</h1>
-              <p className="mt-6 text-xl text-gray-200 italic max-w-2xl mx-auto drop-shadow">La maison des créateurs de demain. Luxe, sélectivité, influence et impact global.</p>
-            </div>
-          </section>
-
-          <section className="py-24 px-6 max-w-full mx-auto animate-fade-in overflow-x-scroll whitespace-nowrap">
-            <h2 className="text-3xl font-bold mb-4 px-4 uppercase tracking-wide">Éditions visuelles</h2>
-            <div className="flex space-x-6 px-4">
-              {[mannequin, img3].map((img, i) => (
-                <img key={i} src={img} alt={`vulture-visual-${i}`} className="inline-block w-[80vw] h-[50vh] object-cover rounded-xl shadow-lg border border-gray-700" />
-              ))}
-            </div>
-          </section>
-
-          <section className="py-32 px-6 max-w-3xl mx-auto animate-fade-in text-center">
-            <h2 className="text-4xl font-bold uppercase tracking-wide mb-6">La Maison VULTURE</h2>
-            <p className="text-gray-300 text-lg leading-relaxed">
-              VULTURE est plus qu'une simple vitrine — c'est une maison d'excellence. Nous représentons les talents d’aujourd’hui et de demain avec une approche radicalement sélective, artistique et stratégique. Dans un monde saturé d’images, notre différence réside dans l’authenticité, l'esthétique et l'impact mesurable.
-            </p>
-          </section>
-        </>
-      )}
-
       {userType && !adminView && (
         <section className="py-32 px-6 max-w-2xl mx-auto animate-fade-in">
           <h2 className="text-4xl font-bold text-center mb-6 uppercase tracking-wide">{userType === "model" ? "Espace Modèle" : "Espace Marque"}</h2>
-          <p className="text-gray-400 text-center mb-10 text-lg">
-            {userType === "model"
-              ? "Vous êtes artiste, mannequin, créateur de contenu ? Rejoignez notre réseau sélectif."
-              : "Vous êtes une maison, une marque ou un label de luxe ? Connectez-vous à notre vivier d'artistes exceptionnels."}
-          </p>
           <form onSubmit={handleSubmit} className="space-y-6">
             <input type="text" name="name" placeholder="Nom ou structure" value={formData.name} onChange={handleChange} className="w-full p-3 bg-gray-900 text-white rounded border border-gray-700 placeholder-gray-500" required />
             <input type="email" name="email" placeholder="Email professionnel" value={formData.email} onChange={handleChange} className="w-full p-3 bg-gray-900 text-white rounded border border-gray-700 placeholder-gray-500" required />
             <textarea name="description" placeholder="Décrivez votre univers, vos projets, votre vision..." value={formData.description} onChange={handleChange} className="w-full p-3 bg-gray-900 text-white rounded border border-gray-700 placeholder-gray-500 h-32" required></textarea>
-            <button type="submit" className="bg-white text-black px-6 py-3 rounded-full font-semibold hover:bg-gray-200 transition w-full shadow">Envoyer mon profil</button>
+            <input type="url" name="portfolio" placeholder="Lien vers votre portfolio (facultatif)" value={formData.portfolio} onChange={handleChange} className="w-full p-3 bg-gray-900 text-white rounded border border-gray-700 placeholder-gray-500" />
+            <input type="number" name="age" placeholder="Âge" value={formData.age} onChange={handleChange} className="w-full p-3 bg-gray-900 text-white rounded border border-gray-700 placeholder-gray-500" required />
+<input type="text" name="platform" placeholder="Plateforme principale (Instagram, TikTok, etc.)" value={formData.platform} onChange={handleChange} className="w-full p-3 bg-gray-900 text-white rounded border border-gray-700 placeholder-gray-500" required />
+<input type="number" name="instagram" placeholder="Abonnés Instagram" value={formData.followers.instagram} onChange={(e) => setFormData({ ...formData, followers: { ...formData.followers, instagram: e.target.value } })} className="w-full p-3 bg-gray-900 text-white rounded border border-gray-700 placeholder-gray-500" />
+<input type="number" name="twitter" placeholder="Abonnés Twitter" value={formData.followers.twitter} onChange={(e) => setFormData({ ...formData, followers: { ...formData.followers, twitter: e.target.value } })} className="w-full p-3 bg-gray-900 text-white rounded border border-gray-700 placeholder-gray-500" />
+<input type="number" name="tiktok" placeholder="Abonnés TikTok" value={formData.followers.tiktok} onChange={(e) => setFormData({ ...formData, followers: { ...formData.followers, tiktok: e.target.value } })} className="w-full p-3 bg-gray-900 text-white rounded border border-gray-700 placeholder-gray-500" />
+<input type="number" name="onlyfans" placeholder="Abonnés OnlyFans" value={formData.followers.onlyfans} onChange={(e) => setFormData({ ...formData, followers: { ...formData.followers, onlyfans: e.target.value } })} className="w-full p-3 bg-gray-900 text-white rounded border border-gray-700 placeholder-gray-500" />
+
+<button type="submit" className="bg-white text-black px-6 py-3 rounded-full font-semibold hover:bg-gray-200 transition w-full shadow">Envoyer mon profil</button>
           </form>
         </section>
       )}
 
       {adminView && (
-        <section className="py-24 px-6 max-w-4xl mx-auto animate-fade-in">
+        <section className="py-24 px-6 max-w-6xl mx-auto animate-fade-in">
           <div className="text-center mb-8">
             <img src="/pdglouisaimee.JPG" alt="PDG Louis-Aimée" className="w-24 h-24 mx-auto rounded-full border-4 border-white mb-4" />
             <h2 className="text-3xl font-bold uppercase tracking-wide">Bonjour Monsieur le PDG LOUIS-AIMÉE</h2>
+            <p className="text-sm text-gray-400">{submittedProfiles.length} candidatures reçues</p>
           </div>
-          {submittedProfiles.length === 0 ? (
-            <p className="text-center text-gray-400">Aucun profil soumis pour le moment.</p>
-          ) : (
-            <ul className="space-y-4">
-              {submittedProfiles.map((profile, index) => (
-                <li key={index} className="border border-gray-800 rounded p-4 bg-gray-900">
-                  <div className="flex justify-between items-center mb-2">
-                    <p className="text-sm text-gray-400">Type : {profile.type}</p>
-                    <span className={`text-xs px-2 py-1 rounded ${profile.status === "accepted" ? "bg-green-600" : profile.status === "refused" ? "bg-red-600" : "bg-yellow-600"}`}>{profile.status}</span>
+          <ul className="space-y-4">
+            {submittedProfiles.map((profile, index) => (
+              <li key={profile.id} className="border border-gray-800 rounded p-4 bg-gray-900">
+                <div className="flex justify-between items-center mb-2">
+                  <p className="text-sm text-gray-400">Type : {profile.type}</p>
+                  <span className={`text-xs px-2 py-1 rounded ${profile.status === "accepted" ? "bg-green-600" : profile.status === "refused" ? "bg-red-600" : "bg-yellow-600"}`}>{profile.status}</span>
+                </div>
+                <p className="text-lg font-semibold">{profile.name}</p>
+                <p className="text-sm">{profile.email}</p>
+                $1
+{profile.age && (<p className='text-sm mt-2'>Âge : {profile.age}</p>)}
+{profile.platform && (<p className='text-sm mt-2'>Plateforme principale : {profile.platform}</p>)}
+<p className='text-sm mt-2'>Abonnés :</p>
+<ul className='text-sm ml-4 list-disc'>
+  <li>Instagram : {profile.followers?.instagram}</li>
+  <li>Twitter : {profile.followers?.twitter}</li>
+  <li>TikTok : {profile.followers?.tiktok}</li>
+  <li>OnlyFans : {profile.followers?.onlyfans}</li>
+</ul>
+                {profile.portfolio && <p className="text-sm mt-2"><a href={profile.portfolio} target="_blank" rel="noopener noreferrer" className="text-blue-400 underline">Voir le portfolio</a></p>}
+                <p className="text-xs text-right text-gray-500 mt-2">Soumis le {profile.timestamp}</p>
+                {profile.status === "pending" && (
+                  <div className="mt-4 flex gap-4">
+                    <button onClick={() => updateStatus(profile.id, "accepted")} className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded">Accepter</button>
+                    <button onClick={() => updateStatus(profile.id, "refused")} className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded">Refuser</button>
                   </div>
-                  <p className="text-lg font-semibold">{profile.name}</p>
-                  <p className="text-sm">{profile.email}</p>
-                  <p className="text-sm italic text-gray-300 mt-2">{profile.description}</p>
-                  <p className="text-xs text-right text-gray-500 mt-2">Soumis le {profile.timestamp}</p>
-                  {profile.status === "pending" && (
-                    <div className="mt-4 flex gap-4">
-                      <button onClick={() => updateStatus(index, "accepted")} className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded">Accepter</button>
-                      <button onClick={() => updateStatus(index, "refused")} className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded">Refuser</button>
-                    </div>
-                  )}
-                </li>
-              ))}
-            </ul>
-          )}
+                )}
+              </li>
+            ))}
+          </ul>
         </section>
       )}
     </div>
   );
 }
-
