@@ -84,7 +84,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white font-sans transition-all duration-1000 scroll-smooth">
+    <div className="min-h-screen bg-black text-white font-sans scroll-smooth transition-opacity duration-700 ease-in-out">
       {!userType && !adminView && !authStep && (<>
   <section className="relative h-screen flex items-center justify-center text-center bg-black pt-24 overflow-hidden">
     <div className="absolute inset-0 w-full h-full overflow-hidden transition-all duration-1000">
@@ -130,7 +130,7 @@ export default function App() {
       </header>
 
       {authStep && !adminView && (
-        <section className="py-32 px-6 max-w-md mx-auto animate-fade-in">
+        <section className="py-32 px-6 max-w-md mx-auto transition-opacity duration-700 ease-in-out">
           <h2 className="text-3xl font-bold text-center mb-6 uppercase tracking-wide">Connexion Admin</h2>
           <form onSubmit={handleAdminAuth} className="space-y-4">
             <input type="text" name="username" placeholder="Nom d'utilisateur" value={authData.username} onChange={(e) => setAuthData({ ...authData, username: e.target.value })} className="w-full p-3 bg-gray-900 text-white rounded border border-gray-700" required />
@@ -141,7 +141,7 @@ export default function App() {
       )}
 
       {userType && !adminView && (
-        <section className="py-32 px-6 max-w-2xl mx-auto animate-fade-in bg-black border-t border-gray-800">
+        <section className="py-32 px-6 max-w-2xl mx-auto transition-opacity duration-700 ease-in-out bg-black border-t border-gray-800">
           <h2 className="text-4xl font-bold text-center mb-6 uppercase tracking-wide">
             {userType === "model" ? "Espace Modèle" : "Espace Marque"}
           </h2>
@@ -163,8 +163,16 @@ export default function App() {
       )}
 
       {adminView && (
-        <section className="py-24 px-6 max-w-6xl mx-auto animate-fade-in">
+        <section className="py-24 px-6 max-w-6xl mx-auto transition-opacity duration-700 ease-in-out">
           <div className="text-center mb-8">
+            <div className="mb-6 flex flex-wrap justify-center gap-4">
+              <button onClick={() => setSubmittedProfiles(submittedProfiles)} className="px-4 py-2 bg-gray-700 rounded hover:bg-gray-600">Tout</button>
+              <button onClick={() => setSubmittedProfiles(submittedProfiles.filter(p => p.type === 'model'))} className="px-4 py-2 bg-gray-700 rounded hover:bg-gray-600">Modèles</button>
+              <button onClick={() => setSubmittedProfiles(submittedProfiles.filter(p => p.type === 'brand'))} className="px-4 py-2 bg-gray-700 rounded hover:bg-gray-600">Marques</button>
+              <button onClick={() => setSubmittedProfiles(submittedProfiles.filter(p => p.status === 'pending'))} className="px-4 py-2 bg-yellow-600 rounded hover:bg-yellow-500">En attente</button>
+              <button onClick={() => setSubmittedProfiles(submittedProfiles.filter(p => p.status === 'accepted'))} className="px-4 py-2 bg-green-600 rounded hover:bg-green-500">Acceptés</button>
+              <button onClick={() => setSubmittedProfiles(submittedProfiles.filter(p => p.status === 'refused'))} className="px-4 py-2 bg-red-600 rounded hover:bg-red-500">Refusés</button>
+            </div>
             <img src="/pdglouisaimee.JPG" alt="PDG Louis-Aimée" className="w-24 h-24 mx-auto rounded-full border-4 border-white mb-4" />
             <h2 className="text-3xl font-bold uppercase tracking-wide">Bonjour Monsieur le PDG LOUIS-AIMÉE</h2>
             <p className="text-sm text-gray-400">{submittedProfiles.length} candidatures reçues</p>
@@ -203,4 +211,5 @@ export default function App() {
     </div>
   );
 }
+
 
