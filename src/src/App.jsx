@@ -29,6 +29,7 @@ export default function App() {
   const [adminView, setAdminView] = useState(false);
   const [authStep, setAuthStep] = useState(false);
   const [authData, setAuthData] = useState({ username: "", password: "" });
+  const [confirmation, setConfirmation] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -40,23 +41,23 @@ export default function App() {
   
 
   const handleChange = (e) => {
-    setFormData({
-      name: "",
-      email: "",
-      description: "",
-      portfolio: "",
-      age: "",
-      platform: "",
-      contact: "",
-      localisation: "",
+  const { name, value } = e.target;
+
+  if (["instagram", "twitter", "tiktok", "onlyfans"].includes(name)) {
+    setFormData((prev) => ({
+      ...prev,
       followers: {
-        instagram: "",
-        twitter: "",
-        tiktok: "",
-        onlyfans: ""
+        ...prev.followers,
+        [name]: value
       }
-    });
-  };
+    }));
+  } else {
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value
+    }));
+  }
+};
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -70,9 +71,16 @@ export default function App() {
       portfolio: "",
       age: "",
       platform: "",
+      contact: "",
+      localisation: "",
       followers: { instagram: "", twitter: "", tiktok: "", onlyfans: "" }
     });
+
+    // Envoi automatique d'un faux mail (console simulation)
+    console.log(`📩 Mail automatique : Merci ${formData.name} d'avoir postulé sur VULTURE. Nous vous tiendrons informé de la suite.`);
     setUserType(null);
+    setConfirmation(true);
+  };
   };
 
   const handleBack = () => {
@@ -103,7 +111,8 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-black text-white font-sans scroll-smooth transition-opacity duration-700 ease-in-out">
-      {!userType && !adminView && !authStep && (<>
+      {!userType && !adminView && !authStep && !confirmation && (<>
+
   <section className="relative h-screen flex items-center justify-center text-center bg-black pt-24 overflow-hidden">
     <div className="absolute inset-0 w-full h-full overflow-hidden transition-all duration-1000">
       <img src={slideshow[bgIndex]} alt="VULTURE Background" className="w-full h-full object-cover object-center scale-105 opacity-80 transition-opacity duration-1000" />
@@ -193,6 +202,13 @@ export default function App() {
       )}
       )}
 
+      {confirmation && (
+        <section className="py-32 px-6 max-w-md mx-auto text-center animate-fade-in">
+          <h2 className="text-3xl font-bold uppercase mb-4 tracking-wide">Merci pour votre envoi !</h2>
+          <p className="text-gray-400">Nous vous tiendrons informé très prochainement. Vous pouvez désormais quitter cette page.</p>
+        </section>
+      )}
+
       {adminView && (
         <section className="py-24 px-6 max-w-6xl mx-auto transition-opacity duration-700 ease-in-out">
           <div className="text-center mb-8">
@@ -242,7 +258,6 @@ export default function App() {
     </div>
   );
 }
-
 
 
 
