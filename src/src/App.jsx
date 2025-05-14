@@ -139,12 +139,14 @@ export default function App() {
           </form>
       </section>
 
-{userType === 'brand' && !adminView && <section className="py-32 px-6 max-w-3xl mx-auto transition-opacity duration-700 ease-in-out bg-black border-t border-amber-500 shadow-inner rounded-lg">
-        <h2 className="text-4xl font-bold text-center mb-6 uppercase tracking-widest text-amber-400">Espace Marque</h2>
+{userType === 'brand' && !adminView && (
+        <section className="py-32 px-6 max-w-3xl mx-auto transition-opacity duration-700 ease-in-out bg-black border-t border-amber-500 shadow-inner rounded-lg">
+          <h2 className="text-4xl font-bold text-center mb-6 uppercase tracking-widest text-amber-400">Espace Marque</h2>
         <form onSubmit={handleSubmit} className="space-y-6">
                                                                                 <button type="submit" className="bg-amber-400 text-black px-6 py-3 rounded-full font-semibold hover:bg-amber-300 transition w-full shadow">Soumettre</button>
-        </form>
-      </section>}
+                </form>
+        </section>
+      )}
       )}
 
 {userType === 'model' && !adminView && <section className="py-32 px-6 max-w-2xl mx-auto transition-opacity duration-700 ease-in-out bg-gradient-to-br from-black via-gray-900 to-black border-t border-gray-800 shadow-xl rounded-xl">
