@@ -144,8 +144,9 @@ export default function App() {
           <h2 className="text-4xl font-bold text-center mb-6 uppercase tracking-widest text-amber-400">Espace Marque</h2>
         <form onSubmit={handleSubmit} className="space-y-6">
                                                                                 <button type="submit" className="bg-amber-400 text-black px-6 py-3 rounded-full font-semibold hover:bg-amber-300 transition w-full shadow">Soumettre</button>
-                $1
-        )}
+                </form>
+        </section>
+      )}
       )}
 
 {userType === 'model' && !adminView && (
