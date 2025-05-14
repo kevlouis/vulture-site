@@ -144,12 +144,12 @@ export default function App() {
           <h2 className="text-4xl font-bold text-center mb-6 uppercase tracking-widest text-amber-400">Espace Marque</h2>
         <form onSubmit={handleSubmit} className="space-y-6">
                                                                                 <button type="submit" className="bg-amber-400 text-black px-6 py-3 rounded-full font-semibold hover:bg-amber-300 transition w-full shadow">Soumettre</button>
-                </form>
-        </section>
-      )}
+                $1
+        )}
       )}
 
-{userType === 'model' && !adminView && <section className="py-32 px-6 max-w-2xl mx-auto transition-opacity duration-700 ease-in-out bg-gradient-to-br from-black via-gray-900 to-black border-t border-gray-800 shadow-xl rounded-xl">
+{userType === 'model' && !adminView && (
+        <section className="py-32 px-6 max-w-2xl mx-auto transition-opacity duration-700 ease-in-out bg-gradient-to-br from-black via-gray-900 to-black border-t border-gray-800 shadow-xl rounded-xl">
           <h2 className="text-4xl font-bold text-center mb-6 uppercase tracking-wide">
             {userType === "model" ? "Espace Modèle" : "Espace Marque"}
           </h2>
@@ -219,6 +219,7 @@ export default function App() {
     </div>
   );
 }
+
 
 
 
