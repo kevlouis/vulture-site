@@ -133,23 +133,16 @@ export default function App() {
         <section className="py-32 px-6 max-w-md mx-auto transition-opacity duration-700 ease-in-out">
           <h2 className="text-3xl font-bold text-center mb-6 uppercase tracking-wide">Connexion Admin</h2>
           <form onSubmit={handleAdminAuth} className="space-y-4">
-            $1$2 transition-transform duration-300 ease-in-out focus:scale-105 focus:outline-none$3 required />
-            $1$2 transition-transform duration-300 ease-in-out focus:scale-105 focus:outline-none$3 required />
-            <button type="submit" className="bg-white text-black px-6 py-3 rounded-full font-semibold hover:bg-gray-200 transition w-full shadow">Se connecter</button>
+            <input type="text" name="username" placeholder="Nom d'utilisateur" value={authData.username} onChange={(e) => setAuthData({ ...authData, username: e.target.value })} className="w-full p-3 bg-gray-900 text-white rounded border border-gray-700 placeholder-gray-500 transition-transform duration-300 ease-in-out focus:scale-105 focus:outline-none" required />
+            <input type="password" name="password" placeholder="Mot de passe" value={authData.password} onChange={(e) => setAuthData({ ...authData, password: e.target.value })} className="w-full p-3 bg-gray-900 text-white rounded border border-gray-700 placeholder-gray-500 transition-transform duration-300 ease-in-out focus:scale-105 focus:outline-none" required />
+                                    <button type="submit" className="bg-white text-black px-6 py-3 rounded-full font-semibold hover:bg-gray-200 transition w-full shadow">Se connecter</button>
           </form>
       </section>
 
 {userType === 'brand' && !adminView && <section className="py-32 px-6 max-w-3xl mx-auto transition-opacity duration-700 ease-in-out bg-black border-t border-amber-500 shadow-inner rounded-lg">
         <h2 className="text-4xl font-bold text-center mb-6 uppercase tracking-widest text-amber-400">Espace Marque</h2>
         <form onSubmit={handleSubmit} className="space-y-6">
-          $1$2 transition-transform duration-300 ease-in-out focus:scale-105 focus:outline-none$3 required />
-          $1$2 transition-transform duration-300 ease-in-out focus:scale-105 focus:outline-none$3 required />
-          $1$2 transition-transform duration-300 ease-in-out focus:scale-105 focus:outline-none$3 required></textarea>
-          $1$2 transition-transform duration-300 ease-in-out focus:scale-105 focus:outline-none$3 />
-          $1$2 transition-transform duration-300 ease-in-out focus:scale-105 focus:outline-none$3 required />
-          $1$2 transition-transform duration-300 ease-in-out focus:scale-105 focus:outline-none$3 />
-          $1$2 transition-transform duration-300 ease-in-out focus:scale-105 focus:outline-none$3 />
-          <button type="submit" className="bg-amber-400 text-black px-6 py-3 rounded-full font-semibold hover:bg-amber-300 transition w-full shadow">Soumettre</button>
+                                                                                <button type="submit" className="bg-amber-400 text-black px-6 py-3 rounded-full font-semibold hover:bg-amber-300 transition w-full shadow">Soumettre</button>
         </form>
       </section>}
       )}
@@ -159,40 +152,17 @@ export default function App() {
             {userType === "model" ? "Espace Modèle" : "Espace Marque"}
           </h2>
           <form onSubmit={handleSubmit} className="space-y-6">
-            $1$2 transition-transform duration-300 ease-in-out focus:scale-105 focus:outline-none$3 required />
-            $1$2 transition-transform duration-300 ease-in-out focus:scale-105 focus:outline-none$3 required />
-            $1$2 transition-transform duration-300 ease-in-out focus:scale-105 focus:outline-none$3 required></textarea>
-            $1$2 transition-transform duration-300 ease-in-out focus:scale-105 focus:outline-none$3 />
-
+                                                
             {userType === "model" && (
               <>
-                $1$2 transition-transform duration-300 ease-in-out focus:scale-105 focus:outline-none$3 required />
-                $1$2 transition-transform duration-300 ease-in-out focus:scale-105 focus:outline-none$3 required />
-                $1$2 transition-transform duration-300 ease-in-out focus:scale-105 focus:outline-none$3 />
-                $1$2 transition-transform duration-300 ease-in-out focus:scale-105 focus:outline-none$3 />
-                $1$2 transition-transform duration-300 ease-in-out focus:scale-105 focus:outline-none$3 />
-                $1$2 transition-transform duration-300 ease-in-out focus:scale-105 focus:outline-none$3 />
-              </>
+                                                                                                              </>
             )}
 
             {userType === "brand" && (
               <>
-                $1$2 transition-transform duration-300 ease-in-out focus:scale-105 focus:outline-none$3 required />
-                $1$2 transition-transform duration-300 ease-in-out focus:scale-105 focus:outline-none$3 />
-                $1$2 transition-transform duration-300 ease-in-out focus:scale-105 focus:outline-none$3 />
-              </>
+                                                              </>
             )}
-            $1$2 transition-transform duration-300 ease-in-out focus:scale-105 focus:outline-none$3 required />
-            $1$2 transition-transform duration-300 ease-in-out focus:scale-105 focus:outline-none$3 required />
-            $1$2 transition-transform duration-300 ease-in-out focus:scale-105 focus:outline-none$3 required></textarea>
-            $1$2 transition-transform duration-300 ease-in-out focus:scale-105 focus:outline-none$3 />
-            $1$2 transition-transform duration-300 ease-in-out focus:scale-105 focus:outline-none$3 required />
-            $1$2 transition-transform duration-300 ease-in-out focus:scale-105 focus:outline-none$3 required />
-            $1$2 transition-transform duration-300 ease-in-out focus:scale-105 focus:outline-none$3 />
-            $1$2 transition-transform duration-300 ease-in-out focus:scale-105 focus:outline-none$3 />
-            $1$2 transition-transform duration-300 ease-in-out focus:scale-105 focus:outline-none$3 />
-            $1$2 transition-transform duration-300 ease-in-out focus:scale-105 focus:outline-none$3 />
-            <button type="submit" className="bg-white text-black px-6 py-3 rounded-full font-semibold hover:bg-gray-200 transition w-full shadow">Envoyer mon profil</button>
+                                                                                                                                    <button type="submit" className="bg-white text-black px-6 py-3 rounded-full font-semibold hover:bg-gray-200 transition w-full shadow">Envoyer mon profil</button>
           </form>
         </section>
       )}
