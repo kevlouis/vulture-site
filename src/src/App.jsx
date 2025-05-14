@@ -137,9 +137,8 @@ export default function App() {
             $1$2 transition-transform duration-300 ease-in-out focus:scale-105 focus:outline-none$3 required />
             <button type="submit" className="bg-white text-black px-6 py-3 rounded-full font-semibold hover:bg-gray-200 transition w-full shadow">Se connecter</button>
           </form>
-      </section>}
-
-      {userType === 'brand' && <section className="py-32 px-6 max-w-3xl mx-auto transition-opacity duration-700 ease-in-out bg-black border-t border-amber-500 shadow-inner rounded-lg">
+      </section>
+{userType === 'brand' && <section className="py-32 px-6 max-w-3xl mx-auto transition-opacity duration-700 ease-in-out bg-black border-t border-amber-500 shadow-inner rounded-lg">
         <h2 className="text-4xl font-bold text-center mb-6 uppercase tracking-widest text-amber-400">Espace Marque</h2>
         <form onSubmit={handleSubmit} className="space-y-6">
           $1$2 transition-transform duration-300 ease-in-out focus:scale-105 focus:outline-none$3 required />
