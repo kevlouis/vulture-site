@@ -137,9 +137,10 @@ export default function App() {
             <input type="password" name="password" placeholder="Mot de passe" value={authData.password} onChange={(e) => setAuthData({ ...authData, password: e.target.value })} className="w-full p-3 bg-gray-900 text-white rounded border border-gray-700 placeholder-gray-500 transition-transform duration-300 ease-in-out focus:scale-105 focus:outline-none" required />
                                     <button type="submit" className="bg-white text-black px-6 py-3 rounded-full font-semibold hover:bg-gray-200 transition w-full shadow">Se connecter</button>
           </form>
-      </section>
+        </section>
+      )}
 
-{userType === 'brand' && !adminView && (
+      {userType === 'brand' && !adminView && (
         <section className="py-32 px-6 max-w-3xl mx-auto transition-opacity duration-700 ease-in-out bg-black border-t border-amber-500 shadow-inner rounded-lg">
           <h2 className="text-4xl font-bold text-center mb-6 uppercase tracking-widest text-amber-400">Espace Marque</h2>
         <form onSubmit={handleSubmit} className="space-y-6">
