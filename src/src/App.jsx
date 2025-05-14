@@ -81,9 +81,8 @@ export default function App() {
     setUserType(null);
     setConfirmation(true);
   };
-  };
 
-  const handleBack = () => {
+const handleBack = () => {
     setUserType(null);
     setAdminView(false);
     setAuthStep(false);
