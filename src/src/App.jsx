@@ -133,29 +133,66 @@ export default function App() {
         <section className="py-32 px-6 max-w-md mx-auto transition-opacity duration-700 ease-in-out">
           <h2 className="text-3xl font-bold text-center mb-6 uppercase tracking-wide">Connexion Admin</h2>
           <form onSubmit={handleAdminAuth} className="space-y-4">
-            <input type="text" name="username" placeholder="Nom d'utilisateur" value={authData.username} onChange={(e) => setAuthData({ ...authData, username: e.target.value })} className="w-full p-3 bg-gray-900 text-white rounded border border-gray-700" required />
-            <input type="password" name="password" placeholder="Mot de passe" value={authData.password} onChange={(e) => setAuthData({ ...authData, password: e.target.value })} className="w-full p-3 bg-gray-900 text-white rounded border border-gray-700" required />
+            $1$2 transition-transform duration-300 ease-in-out focus:scale-105 focus:outline-none$3 required />
+            $1$2 transition-transform duration-300 ease-in-out focus:scale-105 focus:outline-none$3 required />
             <button type="submit" className="bg-white text-black px-6 py-3 rounded-full font-semibold hover:bg-gray-200 transition w-full shadow">Se connecter</button>
           </form>
-        </section>
+      </section>}
+
+      {userType === 'brand' && <section className="py-32 px-6 max-w-3xl mx-auto transition-opacity duration-700 ease-in-out bg-black border-t border-amber-500 shadow-inner rounded-lg">
+        <h2 className="text-4xl font-bold text-center mb-6 uppercase tracking-widest text-amber-400">Espace Marque</h2>
+        <form onSubmit={handleSubmit} className="space-y-6">
+          $1$2 transition-transform duration-300 ease-in-out focus:scale-105 focus:outline-none$3 required />
+          $1$2 transition-transform duration-300 ease-in-out focus:scale-105 focus:outline-none$3 required />
+          $1$2 transition-transform duration-300 ease-in-out focus:scale-105 focus:outline-none$3 required></textarea>
+          $1$2 transition-transform duration-300 ease-in-out focus:scale-105 focus:outline-none$3 />
+          $1$2 transition-transform duration-300 ease-in-out focus:scale-105 focus:outline-none$3 required />
+          $1$2 transition-transform duration-300 ease-in-out focus:scale-105 focus:outline-none$3 />
+          $1$2 transition-transform duration-300 ease-in-out focus:scale-105 focus:outline-none$3 />
+          <button type="submit" className="bg-amber-400 text-black px-6 py-3 rounded-full font-semibold hover:bg-amber-300 transition w-full shadow">Soumettre</button>
+        </form>
+      </section>}
       )}
 
-      {userType && !adminView && (
-        <section className="py-32 px-6 max-w-2xl mx-auto transition-opacity duration-700 ease-in-out bg-black border-t border-gray-800">
+{userType && !adminView && (
+        {userType === 'model' && <section className="py-32 px-6 max-w-2xl mx-auto transition-opacity duration-700 ease-in-out bg-gradient-to-br from-black via-gray-900 to-black border-t border-gray-800 shadow-xl rounded-xl">
           <h2 className="text-4xl font-bold text-center mb-6 uppercase tracking-wide">
             {userType === "model" ? "Espace Modèle" : "Espace Marque"}
           </h2>
           <form onSubmit={handleSubmit} className="space-y-6">
-            <input type="text" name="name" placeholder="Nom ou structure" value={formData.name} onChange={handleChange} className="w-full p-3 bg-gray-900 text-white rounded border border-gray-700 placeholder-gray-500" required />
-            <input type="email" name="email" placeholder="Email professionnel" value={formData.email} onChange={handleChange} className="w-full p-3 bg-gray-900 text-white rounded border border-gray-700 placeholder-gray-500" required />
-            <textarea name="description" placeholder="Décrivez votre univers, vos projets, votre vision..." value={formData.description} onChange={handleChange} className="w-full p-3 bg-gray-900 text-white rounded border border-gray-700 placeholder-gray-500 h-32" required></textarea>
-            <input type="url" name="portfolio" placeholder="Lien vers votre portfolio (facultatif)" value={formData.portfolio} onChange={handleChange} className="w-full p-3 bg-gray-900 text-white rounded border border-gray-700 placeholder-gray-500" />
-            <input type="number" name="age" placeholder="Âge" value={formData.age} onChange={handleChange} className="w-full p-3 bg-gray-900 text-white rounded border border-gray-700 placeholder-gray-500" required />
-            <input type="text" name="platform" placeholder="Plateforme principale (Instagram, TikTok, etc.)" value={formData.platform} onChange={handleChange} className="w-full p-3 bg-gray-900 text-white rounded border border-gray-700 placeholder-gray-500" required />
-            <input type="number" name="instagram" placeholder="Abonnés Instagram" value={formData.followers.instagram} onChange={(e) => setFormData({ ...formData, followers: { ...formData.followers, instagram: e.target.value } })} className="w-full p-3 bg-gray-900 text-white rounded border border-gray-700 placeholder-gray-500" />
-            <input type="number" name="twitter" placeholder="Abonnés Twitter" value={formData.followers.twitter} onChange={(e) => setFormData({ ...formData, followers: { ...formData.followers, twitter: e.target.value } })} className="w-full p-3 bg-gray-900 text-white rounded border border-gray-700 placeholder-gray-500" />
-            <input type="number" name="tiktok" placeholder="Abonnés TikTok" value={formData.followers.tiktok} onChange={(e) => setFormData({ ...formData, followers: { ...formData.followers, tiktok: e.target.value } })} className="w-full p-3 bg-gray-900 text-white rounded border border-gray-700 placeholder-gray-500" />
-            <input type="number" name="onlyfans" placeholder="Abonnés OnlyFans" value={formData.followers.onlyfans} onChange={(e) => setFormData({ ...formData, followers: { ...formData.followers, onlyfans: e.target.value } })} className="w-full p-3 bg-gray-900 text-white rounded border border-gray-700 placeholder-gray-500" />
+            $1$2 transition-transform duration-300 ease-in-out focus:scale-105 focus:outline-none$3 required />
+            $1$2 transition-transform duration-300 ease-in-out focus:scale-105 focus:outline-none$3 required />
+            $1$2 transition-transform duration-300 ease-in-out focus:scale-105 focus:outline-none$3 required></textarea>
+            $1$2 transition-transform duration-300 ease-in-out focus:scale-105 focus:outline-none$3 />
+
+            {userType === "model" && (
+              <>
+                $1$2 transition-transform duration-300 ease-in-out focus:scale-105 focus:outline-none$3 required />
+                $1$2 transition-transform duration-300 ease-in-out focus:scale-105 focus:outline-none$3 required />
+                $1$2 transition-transform duration-300 ease-in-out focus:scale-105 focus:outline-none$3 />
+                $1$2 transition-transform duration-300 ease-in-out focus:scale-105 focus:outline-none$3 />
+                $1$2 transition-transform duration-300 ease-in-out focus:scale-105 focus:outline-none$3 />
+                $1$2 transition-transform duration-300 ease-in-out focus:scale-105 focus:outline-none$3 />
+              </>
+            )}
+
+            {userType === "brand" && (
+              <>
+                $1$2 transition-transform duration-300 ease-in-out focus:scale-105 focus:outline-none$3 required />
+                $1$2 transition-transform duration-300 ease-in-out focus:scale-105 focus:outline-none$3 />
+                $1$2 transition-transform duration-300 ease-in-out focus:scale-105 focus:outline-none$3 />
+              </>
+            )}
+            $1$2 transition-transform duration-300 ease-in-out focus:scale-105 focus:outline-none$3 required />
+            $1$2 transition-transform duration-300 ease-in-out focus:scale-105 focus:outline-none$3 required />
+            $1$2 transition-transform duration-300 ease-in-out focus:scale-105 focus:outline-none$3 required></textarea>
+            $1$2 transition-transform duration-300 ease-in-out focus:scale-105 focus:outline-none$3 />
+            $1$2 transition-transform duration-300 ease-in-out focus:scale-105 focus:outline-none$3 required />
+            $1$2 transition-transform duration-300 ease-in-out focus:scale-105 focus:outline-none$3 required />
+            $1$2 transition-transform duration-300 ease-in-out focus:scale-105 focus:outline-none$3 />
+            $1$2 transition-transform duration-300 ease-in-out focus:scale-105 focus:outline-none$3 />
+            $1$2 transition-transform duration-300 ease-in-out focus:scale-105 focus:outline-none$3 />
+            $1$2 transition-transform duration-300 ease-in-out focus:scale-105 focus:outline-none$3 />
             <button type="submit" className="bg-white text-black px-6 py-3 rounded-full font-semibold hover:bg-gray-200 transition w-full shadow">Envoyer mon profil</button>
           </form>
         </section>
