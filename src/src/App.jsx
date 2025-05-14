@@ -40,12 +40,27 @@ export default function App() {
   
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setFormData({
+      name: "",
+      email: "",
+      description: "",
+      portfolio: "",
+      age: "",
+      platform: "",
+      contact: "",
+      localisation: "",
+      followers: {
+        instagram: "",
+        twitter: "",
+        tiktok: "",
+        onlyfans: ""
+      }
+    });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const newProfile = { ...formData, type: userType, timestamp: new Date().toLocaleString(), status: "pending" };
+    const newProfile = { ...formData, type: userType, timestamp: new Date().toLocaleString(), status: "pending", id: Date.now() };
     setSubmittedProfiles([...submittedProfiles, newProfile]);
     alert("Profil envoyé avec succès.");
     setFormData({
@@ -81,6 +96,7 @@ export default function App() {
   const updateStatus = (id, status) => {
     const updated = submittedProfiles.map((p, index) => index === id ? { ...p, status } : p);
     setSubmittedProfiles(updated);
+    console.log("Statut mis à jour :", updated);
   };
 
   return (
@@ -221,6 +237,7 @@ export default function App() {
     </div>
   );
 }
+
 
 
 
