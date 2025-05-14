@@ -94,10 +94,12 @@ export default function App() {
   };
 
   const updateStatus = (id, status) => {
-    const updated = submittedProfiles.map((p, index) => index === id ? { ...p, status } : p);
-    setSubmittedProfiles(updated);
-    console.log("Statut mis à jour :", updated);
-  };
+  const updated = submittedProfiles.map((p) =>
+    p.id === id ? { ...p, status } : p
+  );
+  setSubmittedProfiles(updated);
+  console.log("Statut mis à jour :", updated);
+};
 
   return (
     <div className="min-h-screen bg-black text-white font-sans scroll-smooth transition-opacity duration-700 ease-in-out">
@@ -160,7 +162,14 @@ export default function App() {
         <section className="py-32 px-6 max-w-3xl mx-auto transition-opacity duration-700 ease-in-out bg-black border-t border-amber-500 shadow-inner rounded-lg">
           <h2 className="text-4xl font-bold text-center mb-6 uppercase tracking-widest text-amber-400">Espace Marque</h2>
         <form onSubmit={handleSubmit} className="space-y-6">
-                                                                                <button type="submit" className="bg-amber-400 text-black px-6 py-3 rounded-full font-semibold hover:bg-amber-300 transition w-full shadow">Soumettre</button>
+  <input type="text" name="name" placeholder="Nom de la marque" value={formData.name} onChange={handleChange} required className="w-full p-3 bg-black text-white border border-amber-500 rounded placeholder-gray-500" />
+  <input type="email" name="email" placeholder="Email professionnel" value={formData.email} onChange={handleChange} required className="w-full p-3 bg-black text-white border border-amber-500 rounded placeholder-gray-500" />
+  <textarea name="description" placeholder="Présentation de la marque, mission, identité..." value={formData.description} onChange={handleChange} required className="w-full p-3 bg-black text-white border border-amber-500 rounded placeholder-gray-500 h-32"></textarea>
+  <input type="url" name="portfolio" placeholder="Site web (facultatif)" value={formData.portfolio} onChange={handleChange} className="w-full p-3 bg-black text-white border border-amber-500 rounded placeholder-gray-500" />
+  <input type="text" name="platform" placeholder="Secteur (Mode, Cinéma, etc.)" value={formData.platform} onChange={handleChange} required className="w-full p-3 bg-black text-white border border-amber-500 rounded placeholder-gray-500" />
+  <input type="text" name="contact" placeholder="Responsable contact" value={formData.contact || ""} onChange={(e) => setFormData({ ...formData, contact: e.target.value })} className="w-full p-3 bg-black text-white border border-amber-500 rounded placeholder-gray-500" />
+  <input type="text" name="localisation" placeholder="Pays / Siège" value={formData.localisation || ""} onChange={(e) => setFormData({ ...formData, localisation: e.target.value })} className="w-full p-3 bg-black text-white border border-amber-500 rounded placeholder-gray-500" />
+  <button type="submit" className="bg-amber-400 text-black px-6 py-3 rounded-full font-semibold hover:bg-amber-300 transition w-full shadow">Soumettre</button>
                 </form>
         </section>
       )}
@@ -168,21 +177,17 @@ export default function App() {
 
 {userType === 'model' && !adminView && (
         <section className="py-32 px-6 max-w-2xl mx-auto transition-opacity duration-700 ease-in-out bg-gradient-to-br from-black via-gray-900 to-black border-t border-gray-800 shadow-xl rounded-xl">
-          <h2 className="text-4xl font-bold text-center mb-6 uppercase tracking-wide">
-            {userType === "model" ? "Espace Modèle" : "Espace Marque"}
-          </h2>
+          <h2 className="text-4xl font-bold text-center mb-6 uppercase tracking-wide">Espace Modèle</h2>
           <form onSubmit={handleSubmit} className="space-y-6">
-                                                
-            {userType === "model" && (
-              <>
-                                                                                                              </>
-            )}
-
-            {userType === "brand" && (
-              <>
-                                                              </>
-            )}
-                                                                                                                                    <button type="submit" className="bg-white text-black px-6 py-3 rounded-full font-semibold hover:bg-gray-200 transition w-full shadow">Envoyer mon profil</button>
+            <input type="text" name="name" placeholder="Nom complet" value={formData.name} onChange={handleChange} required className="w-full p-3 bg-gray-900 text-white rounded border border-gray-700 placeholder-gray-500" />
+            <input type="email" name="email" placeholder="Email professionnel" value={formData.email} onChange={handleChange} required className="w-full p-3 bg-gray-900 text-white rounded border border-gray-700 placeholder-gray-500" />
+            <input type="number" name="age" placeholder="Âge" value={formData.age} onChange={handleChange} required className="w-full p-3 bg-gray-900 text-white rounded border border-gray-700 placeholder-gray-500" />
+            <input type="text" name="platform" placeholder="Plateforme principale (Instagram, TikTok, etc.)" value={formData.platform} onChange={handleChange} required className="w-full p-3 bg-gray-900 text-white rounded border border-gray-700 placeholder-gray-500" />
+            <input type="number" name="instagram" placeholder="Abonnés Instagram" value={formData.followers.instagram} onChange={(e) => setFormData({ ...formData, followers: { ...formData.followers, instagram: e.target.value } })} className="w-full p-3 bg-gray-900 text-white rounded border border-gray-700 placeholder-gray-500" />
+            <input type="number" name="twitter" placeholder="Abonnés Twitter" value={formData.followers.twitter} onChange={(e) => setFormData({ ...formData, followers: { ...formData.followers, twitter: e.target.value } })} className="w-full p-3 bg-gray-900 text-white rounded border border-gray-700 placeholder-gray-500" />
+            <input type="number" name="tiktok" placeholder="Abonnés TikTok" value={formData.followers.tiktok} onChange={(e) => setFormData({ ...formData, followers: { ...formData.followers, tiktok: e.target.value } })} className="w-full p-3 bg-gray-900 text-white rounded border border-gray-700 placeholder-gray-500" />
+            <input type="number" name="onlyfans" placeholder="Abonnés OnlyFans" value={formData.followers.onlyfans} onChange={(e) => setFormData({ ...formData, followers: { ...formData.followers, onlyfans: e.target.value } })} className="w-full p-3 bg-gray-900 text-white rounded border border-gray-700 placeholder-gray-500" />
+            <button type="submit" className="bg-white text-black px-6 py-3 rounded-full font-semibold hover:bg-gray-200 transition w-full shadow">Soumettre</button>
           </form>
         </section>
       )}
@@ -237,7 +242,6 @@ export default function App() {
     </div>
   );
 }
-
 
 
 
